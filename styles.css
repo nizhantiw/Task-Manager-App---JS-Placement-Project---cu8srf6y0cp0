@@ -1,0 +1,133 @@
+*{
+    margin: 0.3% 0.3%;
+    /* padding: border-box;*/
+    /* box-sizing: border-box; */
+
+}
+body{
+    background-color: black;
+}
+.title h1{
+    color: white;
+    /* text-align: center; */
+    /* margin: 1rem 0 3rem;
+    */
+} 
+/* .input_field{
+    margin: 0.5px;
+    padding: 0.5px;
+   
+   
+} */
+.title{
+    text-align: center;
+}
+.open {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 5px 20px #b9aaaa;
+    height: 100vh;
+    padding-bottom: 20px;
+}
+
+.input{
+ 
+    outline: none;
+    height: 50px;
+    border-radius: 10px;
+    width: 320px;
+    margin: 0.4rem;
+    box-shadow: 1px 5px 10px 1px grey;
+    transition: all 0.5s ease 0s;
+    font-size: 1.15rem;
+    
+}
+.button{
+    background-color: black;
+    outline: none;
+    border: none;
+    color: white;
+    height: 40px;
+    border-radius: 10px;
+    width: 110px;
+    margin: 0.4rem;
+    transition: all 0.5s ease 0s;
+    font-size: 1.15rem;
+}
+
+.button:hover{
+    background-color:rgb(17, 17, 124);
+    /* color: black; */
+    cursor: pointer;
+    transform: scale(1.2);
+    
+}
+.main{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: auto;
+
+}
+.contener{
+    display: flex;
+    width: 271px;
+    /* height: 90px; */
+    /* width: auto; */
+    height: auto;
+    border-radius: 10px;
+    background-color: #bbafaf;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: .7rem 1.5rem;
+    box-shadow: 3px -6px 6px 0px #84a157;
+    cursor: pointer;
+}
+/* .contener p{
+     flex: 1; 
+} */
+.discription{
+    background-color: aliceblue;
+    color: blue;
+    /* width: 50px;
+    height: 50px; */
+    justify-content: left;
+    text-align: left;
+}
+
+.card_header{
+    margin-top: 3px;
+    background-color: black;
+    color: white;
+    height: 40px;
+    border-radius: 15px;
+}
+
+#In_Progress,#In_Review,#Done {
+    background-color: white;
+    width: 100vh;
+    border-radius: 10px;
+    box-shadow: 3px 5px 20px #b9aaaa;
+   
+}
+/* #In_Review{
+    background-color: white;
+    width: 100vh;
+    border-radius: 10px;
+    box-shadow: 3px 5px 20px #b9aaaa;
+}
+#Done{
+    background-color: white;
+    width: 100vh;
+    border-radius: 10px;
+    box-shadow: 3px 5px 20px;
+} */
+#error{
+    color: red;
+    text-decoration: solid;
+}
+.hide{
+    display: none;
+}
