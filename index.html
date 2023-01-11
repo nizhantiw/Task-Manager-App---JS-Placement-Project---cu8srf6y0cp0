@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/2ef5dd2497.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Task Manager App</title>
+  </head>
+  <body>
+    <!-- modal -->
+    <div class="modal" id="todo_form">
+      <div class="header">
+        <div class="title">Add Task</div>
+        <button class="btn close-modal">&times;</button>
+      </div>
+      <div class="body">
+        <input type="text" id="todo_input" placeholder="Task Title" />
+        <input type="text" id="descrption" placeholder="Task Description" />
+        <input type="submit" value="Add Todo" id="todo_submit" />
+        
+      </div>
+    </div>
     
-    <title>Task Manager App </title>
-</head>
-<body> 
-    <div class="title">
-        <h1><i class="fa-solid fa-list"></i>Task Manager App </h1>
-    </div>
-    <div class="main">
-        <div class="open" id="open">
-            <div class="input_field">
-                <div class="card_header">
-                    <h1>Open</h1>
-                </div>
-                <input type="text" class="input" id="text" placeholder="Enter task... " required>
-                <span id="error"></span><br>
-                <button type="submit" class="button" id="button">Creat Task</button>
-                
-           </div>
-        </div >
-        <div class="box" id="In_Progress">
-            <div class="card_header">
-                <h1>In Progress</h1>
-            </div>
-        </div>
 
-        <div class="box" id="In_Review">
-            <div class="card_header">
-                <h1>In Review</h1>
-            </div>
-        </div>
 
-        <div class="box" id="Done">
-            <div class="card_header">
-                <h1>Done</h1>
-            </div>
-        </div>
-        
-        
-
-    </div>
+    
    
     
-    <script src="App.js"></script>
-    
-</body>
+    <!-- todo -->
+    <div class="todo-container">
+      <div class="status" id="no_status">
+        <h1>Open</h1>
+        <button id="add_btn" data-target-modal="#todo_form">+ Add Task</button>
+        <div class="todo" draggable="true">
+          Complete DSA0
+          <span class="close">&times;</span>
+        </div>
+      </div>
+      <div class="status">
+        <h1>In Progress</h1>
+      </div>
+      <div class="status">
+        <h1>In Review</h1>
+      </div>
+      <div class="status">
+        <h1>Done</h1>
+      </div>
+    </div>
+
+    <div id="overlay"></div>
+
+    <script src="app.js"></script>
+  </body>
 </html>
