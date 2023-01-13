@@ -8,13 +8,12 @@
 body{
     width: 100%;
     height:auto;
-    background: url("AvhsQod\ \(1\).jpg");
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     overflow: hidden;
-    background-color: rgb(47, 99, 82); 
+    background-color: rgb(230, 162, 218); 
     position: relative;
 }
 
@@ -47,6 +46,7 @@ body{
     width: 78px;
     border-radius:6px ;
     cursor: pointer;
+    background-color: #bdf0a7;
     /* background: #ffffff; */
 }
 /* button css try */
@@ -78,33 +78,37 @@ body{
     height: 442px;
     /* background-color: rgba(242, 233, 233, 0.259); */
     border-radius:5px ;
-    background-color: #4ae7a6;
+    background-color: #6e90e6;
 }
 
 #box1{
     margin: 4px;
     text-align: center;
+    background-color: #a7e461;
 }
 #box2{
     margin: 4px;
     text-align: center;
+    background-color: #e46e6e;
 
 }
 #box3{
     margin: 4px;
     text-align: center;
+    background-color: #a7e461;
 
 }
 #box4{
     margin: 4px;
     text-align: center;
+    background-color: #e46e6e;
 
 }
 .heading{
     margin: 15px;
 }
 .heading h2{
-    color: #1e0341;
+    color: #030303;
     font-weight: bolder;
 }
 .container-list1{
@@ -118,7 +122,21 @@ body{
     border-radius: 3px;
     margin-bottom: 5px;
     cursor: pointer;
-}
+    width: 285px;
+    height: 120px;
+    background-color: rgb(225, 152, 152);
+    animation-name: example;
+    animation-duration: 3s;
+    animation-iteration-count:infinite ;
+  }
+  
+  @keyframes example {
+    0%   {background-color: red;}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    100% {background-color: green;}
+  }
+
 .item-color{
     width: 32px;
     height: 8px;
@@ -215,7 +233,7 @@ body{
     position: absolute;
     top: 25%;
     left: 35%;
-    background-color: #ff004f;
+    background-color: #6358ae;
     width: 30%;
 }
 
@@ -228,7 +246,7 @@ button {
     margin-left: 20%;
 }
 button:hover {
-    background-color: #ff004f;
+    background-color: #eb5c5c;
 }
 
 .modle-container-style {
@@ -239,7 +257,7 @@ button:hover {
 }
 
 lable {
-    color: black;
+    color: rgb(80, 76, 76);
     margin: 10px;
     font-weight: bolder;
 }
@@ -282,4 +300,22 @@ lable {
     border-radius: 50%;
     border: solid 3px rgb(17, 139, 17);
     background-color: white;
+}
+
+/* dark mode */
+.mode {
+    float:right;
+}
+.change {
+    cursor: pointer;
+    border: 1px solid #555;
+    border-radius: 40%;
+    width: 20px;
+    text-align: center;
+    padding: 5px;
+    margin-left: 8px;
+}
+.dark{
+    background-color: #222;
+    color: #e6e6e6;
 }
