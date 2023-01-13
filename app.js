@@ -1,134 +1,222 @@
-const todos = document.querySelectorAll(".todo");
-const all_status = document.querySelectorAll(".status");
-let draggableTodo = null;
+let taskHeading = document.querySelector(".task-heading");
+let input = document.querySelector(".add-input");
+let button = document.querySelector(".add-btn");
+const containerList = document.querySelector(".container-list");
+const modle_container = document.querySelector('.modle-container');
 
-todos.forEach((todo) => {
-  todo.addEventListener("dragstart", dragStart);
-  todo.addEventListener("dragend", dragEnd);
-});
+input.setAttribute("placeholder", "Please Enter Task");
 
-function dragStart() {
-  draggableTodo = this;
-  setTimeout(() => {
-    this.style.display = "none";
-  }, 0);
-  console.log("dragStart");
+
+function addTask() {
+    if(input.value === "") {
+        alert("please enter task");
+    }
+    else {
+    let inputValue = input.value;
+
+    const openList = document.createElement('div');
+    openList.classList = "container-list1-item";
+    const nameOfTask = document.createElement('h4');
+    nameOfTask.innerText = inputValue;
+    const descriptionOfTask = document.createElement('p');
+    descriptionOfTask.classList = "description";
+    // const desDiv = document.createElement('div');
+    // desDiv.classList = "desc-div";
+    // desDiv.appendChild(descriptionOfTask);
+
+    const deleteTask = document.createElement('button');
+    deleteTask.classList = "delete";
+    deleteTask.innerText = "";
+    const itemColor = document.createElement('div');
+    itemColor.classList.add('item-color');
+    openList.appendChild(itemColor);
+    // const descBtn = document.createElement('div');
+    // descBtn.classList.add('desc-btn');
+    // // add paragraph using modal
+    // descriptionOfTask.appendChild(descBtn);
+    // descBtn.addEventListener('click', function () {
+    //     openList.remove();
+    // });
+
+
+
+    openList.append(nameOfTask, descriptionOfTask, deleteTask)
+    containerList.appendChild(openList);
+
+    deleteTask.addEventListener('click', (e) => {
+        e.stopPropagation()
+        openList.remove();
+    })
+    editModel(openList, nameOfTask, descriptionOfTask);
+    input.value = null;
+
+    openList.setAttribute("draggable", "true");
+    openList.addEventListener('dragstart', () => {
+        openList.classList.add('dragging');
+    });
+    openList.addEventListener('dragend', () => {
+        openList.classList.remove('dragging');
+    });
+
+    const listcontainer = document.querySelectorAll('.container-list');
+    listcontainer.forEach((list) => {
+        list.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const draggingElm = document.querySelector('.dragging');
+            list.appendChild(draggingElm);
+        })
+    })
+
+}
 }
 
-function dragEnd() {
-  draggableTodo = null;
-  setTimeout(() => {
-    this.style.display = "block";
-  }, 0);
-  console.log("dragEnd");
+function editModel(div, ip, des) {
+    div.addEventListener('dblclick', (e) => {
+        e.stopPropagation()
+        const storeDiv = document.createElement('div');
+        storeDiv.classList = "modle-container-style"
+        const taskLable = document.createElement('lable');
+        taskLable.innerText = "Task Name";
+        const descriptionLable = document.createElement('lable');
+        descriptionLable.innerText = "Description";
+
+        const inputTask = document.createElement('input');
+        inputTask.classList = "editInput";
+        inputTask.setAttribute('id', 'edit1');
+        inputTask.setAttribute('type', 'text');
+        inputTask.value = ip.innerText;
+
+        const textArea = document.createElement('textarea');
+        textArea.classList = "editInput"
+        textArea.setAttribute('cols', '5');
+        textArea.setAttribute('rows', '5');
+        textArea.value = des.innerText;
+
+        // const closeBtn = document.createElement('&times;');
+        // closeBtn.classList = "close-btn";
+
+        const divButton = document.createElement('div');
+        divButton.classList = "buttonDiv";
+
+        const saveBtn = document.createElement('button');
+        saveBtn.innerText = 'save';
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = 'close';
+
+        divButton.appendChild(saveBtn);
+        divButton.appendChild(deleteBtn);
+        storeDiv.append(taskLable, inputTask, descriptionLable, textArea, divButton)
+        modle_container.appendChild(storeDiv)
+
+        saveTheEditedValue(saveBtn, ip, des, storeDiv, inputTask, textArea, "save");
+        saveTheEditedValue(deleteBtn, ip, des, storeDiv, inputTask, textArea, "close")
+        console.log(div.childNodes);
+    })
 }
 
-all_status.forEach((status) => {
-  status.addEventListener("dragover", dragOver);
-  status.addEventListener("dragenter", dragEnter);
-  status.addEventListener("dragleave", dragLeave);
-  status.addEventListener("drop", dragDrop);
-});
+function saveTheEditedValue(btnFun, child, des, mainDiv, input1, input2, condition) {
+    btnFun.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (condition === "save") {
+            child = input1.value;
+            des.innerText = input2.value;
+            mainDiv.remove();
+        } else {
+            mainDiv.remove();
+        }
 
-function dragOver(e) {
-  e.preventDefault();
-  //   console.log("dragOver");
+    })
 }
+    // openList.setAttribute("draggable", "true");
+    // openList.addEventListener('dragstart', () => {
+    //     openList.classList.add('dragging');
+    // });
+    // openList.addEventListener('dragend', () => {
+    //     openList.classList.remove('dragging');
+    // });
 
-function dragEnter() {
-  this.style.border = "1px dashed #ccc";
-  console.log("dragEnter");
-}
+    // const listcontainer = document.querySelectorAll('.container-list');
+    // listcontainer.forEach((list) => {
+    //     list.addEventListener('dragover', (e) => {
+    //         e.preventDefault();
+    //         const draggingElm = document.querySelector('.dragging');
+    //         list.appendChild(draggingElm);
+    //     })
+    // })
 
-function dragLeave() {
-  this.style.border = "none";
-  console.log("dragLeave");
-}
+button.addEventListener('click', addTask)
 
-function dragDrop() {
-  this.style.border = "none";
-  this.appendChild(draggableTodo);
-  console.log("dropped");
-}
+// button.addEventListener("click", function () {
+//   //console.log("hello");
 
-/* modal */
-const btns = document.querySelectorAll("[data-target-modal]");
-const close_modals = document.querySelectorAll(".close-modal");
-const overlay = document.getElementById("overlay");
+//   if(input.value === "") {
+//     alert("Please Fill This Field");
+//   }
+//   else {
+//   var containertList1Item = document.createElement('div');
+//   containertList1Item.classList.add('container-list1-item');
+//   containerList.appendChild(containertList1Item);
 
-btns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelector(btn.dataset.targetModal).classList.add("active");
-    overlay.classList.add("active");
-  });
-});
+//   let itemColor = document.createElement('div');
+//   itemColor.classList.add('item-color');
+//   containertList1Item.appendChild(itemColor);
+//   // if (containerList == containertList1Item) {
+//   //   itemColor.style.display = "#e75b4a";
+//   // }
+//   // if (containerList == )
 
-close_modals.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const modal = btn.closest(".modal");
-    modal.classList.remove("active");
-    overlay.classList.remove("active");
-  });
-});
+//   let itemHeading = document.createElement('div');
+//   itemHeading.classList.add('item-heading');
+//   containertList1Item.appendChild(itemHeading);
 
-window.onclick = (event) => {
-  if (event.target == overlay) {
-    const modals = document.querySelectorAll(".modal");
-    modals.forEach((modal) => modal.classList.remove("active"));
-    overlay.classList.remove("active");
-  }
-};
+//   let heading = document.createElement('h3');
+//   // heading.classList.add('task-heading');
+//   heading.innerText = input.value;
+//   itemHeading.appendChild(heading);
+//   input.value = '';
 
-/* create todo  */
-const todo_submit = document.getElementById("todo_submit");
+//   const description = document.createElement('div');
+//   description.classList.add('description');
+//   containertList1Item.appendChild(description);
 
-todo_submit.addEventListener("click", createTodo);
+//   const decsPara = document.createElement('div');
+//   decsPara.classList.add('desc-para');
+//   description.appendChild(decsPara);
 
-function createTodo() {
-  const todo_div = document.createElement("div");
-  const input_val = document.getElementById("todo_input").value;
-  const input_val1 = document.getElementById("descrption").value;
-  const txt = document.createTextNode(input_val);
-  const txt1 = document.createTextNode(input_val1);
+//   const para = document.createElement('p');
+//   para.classList.add('para');
+//   // add paragraph using modal
+//   decsPara.appendChild(para);
 
-  
+//   var descBtn = document.createElement('div');
+//   descBtn.classList.add('desc-btn');
+//   // add paragraph using modal
+//   description.appendChild(descBtn);
+
+//   descBtn.addEventListener('click', function () {
+//     containertList1Item.remove();
+//   });
+//   // open modal
+
+//   containertList1Item.addEventListener('dblclick', function () {
+//     containertList1Item.setAttribute("data-bs-toggle", "modal");
+//     containertList1Item.setAttribute("data-bs-target", "#exampleModal");
 
 
-  todo_div.appendChild(txt);
-  todo_div.classList.add("todo");
-  todo_div.setAttribute("draggable", "true");
+//     const messageText = document.querySelector("#message-text");
+//     const addPara = document.querySelector("#add-para");
+//     const recipientName = document.querySelector("#recipient-name");
 
-  todo_div.onclick = function(){
-    confirm(document.getElementById("descrption").value);
-  };
+//     addPara.addEventListener('click', function () {
 
-  /* create span */
-  const span = document.createElement("span");
-  const span_txt = document.createTextNode("\u00D7");
-  span.classList.add("close");
-  span.appendChild(span_txt);
+//       heading.innerText = recipientName.value;
 
-  todo_div.appendChild(span);
+//       para.innerText = messageText.value;
+//     });
+//     // recipientName.value=' ';
+//     // messageText.value=' ';
 
-  no_status.appendChild(todo_div);
 
-  span.addEventListener("click", () => {
-    span.parentElement.style.display = "none";
-  });
-  //   console.log(todo_div);
-
-  todo_div.addEventListener("dragstart", dragStart);
-  todo_div.addEventListener("dragend", dragEnd);
-
-  document.getElementById("todo_input").value = "";
-  todo_form.classList.remove("active");
-  overlay.classList.remove("active");
-}
-
-const close_btns = document.querySelectorAll(".close");
-
-close_btns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    btn.parentElement.style.display = "none";
-  });
-});
+//   });
+  // DRAG START
